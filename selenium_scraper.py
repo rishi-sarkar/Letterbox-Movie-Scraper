@@ -64,7 +64,7 @@ def scrape_letterboxd_movies_and_ratings(username_to_scrape):
         page += 1
 
     driver.quit()
-    
+
     return results
 
 
@@ -76,3 +76,11 @@ if __name__ == "__main__":
     print("\n--- FINAL RESULTS ---")
     for entry in data:
         print(f"Movie: {entry['film_name']} | Rating: {entry['rating']}")
+
+    """Save the scraped movie data to a text file."""
+    with open("letterboxd_movies.txt", "w", encoding="utf-8") as file:
+        for entry in data:
+            file.write(
+                f"{entry['film_name']},{entry['rating']}\n")
+            # f"Movie: {entry['film_name']} | Rating: {entry['rating']}\n")
+    print(f"Results saved to letterboxd_movies.txt")
