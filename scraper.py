@@ -51,7 +51,6 @@ def scrape_letterboxd_movies_and_ratings(username):
 
         for container in film_containers:
             film_div = container.find("div")
-            # Extract the data-film-name attribute
             if film_div:
                 target_link = film_div.get("data-target-link")
                 film_name = getTitle(target_link)
@@ -76,8 +75,8 @@ def scrape_letterboxd_movies_and_ratings(username):
 
 
 if __name__ == "__main__":
-    # Replace with any Letterboxd username you want to debug
-    username_to_scrape = "shreysinha"
+    # Replace with Letterboxd username
+    username_to_scrape = "username"
     data = scrape_letterboxd_movies_and_ratings(username_to_scrape)
 
     print("\n--- FINAL RESULTS ---")

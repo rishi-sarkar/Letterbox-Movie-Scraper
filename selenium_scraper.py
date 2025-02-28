@@ -69,8 +69,8 @@ def scrape_letterboxd_movies_and_ratings(username_to_scrape):
 
 
 if __name__ == "__main__":
-    # Replace with any Letterboxd username you want to debug
-    username_to_scrape = "shreysinha"
+    # Replace with your Letterboxd username
+    username_to_scrape = "username"
     data = scrape_letterboxd_movies_and_ratings(username_to_scrape)
 
     print("\n--- FINAL RESULTS ---")
