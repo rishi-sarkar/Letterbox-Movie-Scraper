@@ -50,6 +50,9 @@ def scrape_letterboxd_movies_and_ratings(username_to_scrape):
             frame_title = container.find("span", class_="frame-title")
             if frame_title:
                 title_text = frame_title.text.strip()
+                movie = title_text
+                year = movie[-5:-1]  # Extracts the 4-digit year by slicing out the characters between the parentheses
+                movie_name = movie[:-7]   # Removes the space and the 6-character year segment (including the parentheses)
 
             rating = container.find(
                 "span", class_="rating")
@@ -58,7 +61,8 @@ def scrape_letterboxd_movies_and_ratings(username_to_scrape):
                 user_rating = rating.count('★') + float(rating.count('½'))/2
 
             results.append({
-                "film_name": title_text,
+                "film_name": movie_name,
+                "year": year,
                 "rating": user_rating
             })
         page += 1
@@ -70,17 +74,17 @@ def scrape_letterboxd_movies_and_ratings(username_to_scrape):
 
 if __name__ == "__main__":
     # Replace with your Letterboxd username
-    username_to_scrape = "username"
+    username_to_scrape = "pagarw12"
     data = scrape_letterboxd_movies_and_ratings(username_to_scrape)
 
     print("\n--- FINAL RESULTS ---")
     for entry in data:
-        print(f"Movie: {entry['film_name']} | Rating: {entry['rating']}")
+        print(f"Movie: {entry['film_name']} | Year: {entry['year']} | Rating: {entry['rating']}")
 
     """Save the scraped movie data to a text file."""
     with open("letterboxd_movies.txt", "w", encoding="utf-8") as file:
         for entry in data:
             file.write(
-                f"{entry['film_name']},{entry['rating']}\n")
+                f"{entry['film_name']},{entry['year']},{entry['rating']}\n")
             # f"Movie: {entry['film_name']} | Rating: {entry['rating']}\n")
     print(f"Results saved to letterboxd_movies.txt")
